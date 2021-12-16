@@ -1,0 +1,48 @@
+{
+  "name": "toga-dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@apollo/client": "^3.5.5",
+    "@gnosis.pm/safe-apps-sdk": "^6.1.1",
+    "@gnosis.pm/safe-apps-web3modal": "^6.0.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@walletconnect/web3-provider": "^1.6.6",
+    "ethers": "^5.5.2",
+    "graphql": "^16.0.1",
+    "memoizee": "^0.4.15",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "react-select": "^5.2.1",
+    "react-table": "^7.7.0",
+    "styled-components": "^5.3.3",
+    "web3modal": "^1.9.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

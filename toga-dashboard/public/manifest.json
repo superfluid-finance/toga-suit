@@ -1,0 +1,18 @@
+{
+	"short_name": "PIC/TOGA Dashboard",
+	"name": "PIC/TOGA Dashboard",
+	"iconPath": "favicon.png",
+	"logo": "favicon.png",
+	"description": "Dashboard for monitoring and operating on TOGA related interactions.",
+	"icons": [
+		{
+			"src": "favicon.png",
+			"sizes": "32x32",
+			"type": "image/png"
+		}
+	],
+	"start_url": ".",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"background_color": "#ffffff"
+}
