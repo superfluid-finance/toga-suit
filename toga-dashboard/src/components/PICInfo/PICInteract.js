@@ -44,11 +44,12 @@ function PICInteract({ picAddress, togaContract, enabled }) {
 
 	return enabled ? (
 		<InteractivePIC>
-			<Button
+			{isPIC && (
+				<Button
 				text={isPIC ? 'Change exit rate' : 'Become PIC'}
 				onClick={() => toggleModal(!modalToggled)}
 				disabled={buttonDisabled}
-			/>
+			/>)}
 			{isPIC ? (
 				<ExitRateModal
 					enabled={modalToggled}
