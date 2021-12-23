@@ -5,7 +5,7 @@ export const XDAI = {
 	ethersId: 'xdai',
 	graphUrl:
 		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-xdai',
-	togaAddress: '0x0942570634A80bcd096873afC9b112A900492fd7',
+	togaAddress: '0xb7DE52F4281a7a276E18C40F94cd93159C4A2d22',
 	rpcUrl: process.env.REACT_APP_XDAI_RPC_URL,
 	getTxLink: (transactionId) =>
 		`https://blockscout.com/xdai/mainnet/tx/${transactionId}`,
@@ -16,7 +16,7 @@ export const MATIC = {
 	ethersId: 'matic',
 	graphUrl:
 		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-matic',
-	togaAddress: '0x1b18770E5198983AF04B3735d01E09A57d27bD43',
+	togaAddress: '0x6AEAeE5Fd4D05A741723D752D30EE4D72690A8f7',
 	rpcUrl: process.env.REACT_APP_MATIC_RPC_URL,
 	getTxLink: (transactionId) => `https://polygonscan.com/tx/${transactionId}`,
 };
