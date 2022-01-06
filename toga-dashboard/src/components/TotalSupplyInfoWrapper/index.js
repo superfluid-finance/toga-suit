@@ -44,6 +44,8 @@ const OptionToggle = styled.div`
 	right: ${(props) => (props.selectedUnit === USD ? '0px' : 'unset')};
 `;
 
+const TOKEN_NOT_SUPPORTED = 'Token not supported';
+
 function TotalSupplyInfoWrapper({ loading, token, totalSupply }) {
 	const [selectedUnit, setSelectedUnit] = useState(COUNT);
 	const [usdValue, setUsdValue] = useState(null);
@@ -52,7 +54,11 @@ function TotalSupplyInfoWrapper({ loading, token, totalSupply }) {
 	const selectedToken = useContext(SelectedTokenContext);
 
 	useEffect(() => {
-		if (!token || !totalSupply || !token.underlyingToken) {
+		if (!token || loading) {
+			return;
+		}
+		if (totalSupply == null || token.underlyingToken == null) {
+			setUsdValue(TOKEN_NOT_SUPPORTED);
 			return;
 		}
 		const setTokenUsdValue = async () => {
@@ -63,16 +69,15 @@ function TotalSupplyInfoWrapper({ loading, token, totalSupply }) {
 			);
 			if (usdValue !== null) {
 				setUsdValue(
-					fromNaturalUnit(totalSupply, selectedToken) * usdValue +
-						' USD',
+					fromNaturalUnit(totalSupply, token) * usdValue + ' USD',
 				);
 			} else {
-				setUsdValue('Token not supported');
+				setUsdValue(TOKEN_NOT_SUPPORTED);
 			}
 			setLoadingUsdValue(false);
 		};
 		setTokenUsdValue();
-	}, [token, totalSupply, selectedNetwork, selectedToken]);
+	}, [token, totalSupply, selectedNetwork, loading]);
 
 	const UnitToggle = (
 		<UnitToggleContainer>

@@ -21,6 +21,7 @@ export const GET_TOKEN_STATISTICS = gql`
 				underlyingToken {
 					id
 				}
+				decimals
 			}
 		}
 	}
