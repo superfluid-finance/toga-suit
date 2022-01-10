@@ -57,17 +57,27 @@ function TotalSupplyInfoWrapper({ loading, token, totalSupply }) {
 		if (!token || loading) {
 			return;
 		}
-		if (totalSupply == null || token.underlyingToken == null) {
+		if (totalSupply == null) {
 			setUsdValue(TOKEN_NOT_SUPPORTED);
 			return;
 		}
 		const setTokenUsdValue = async () => {
 			setLoadingUsdValue(true);
-			const usdValue = await fetchTokenUsdValue(
-				selectedNetwork.coinGeckoId,
-				token.underlyingToken.id,
-			);
-			if (usdValue !== null) {
+			let usdValue = null;
+			if (token.underlyingToken) {
+				usdValue = await fetchTokenUsdValue(
+					selectedNetwork.coinGeckoId,
+					token.underlyingToken.id,
+				);
+			}
+
+			if (usdValue == null) {
+				usdValue = await fetchTokenUsdValue(
+					selectedNetwork.coinGeckoId,
+					token.id,
+				);
+			}
+			if (usdValue != null) {
 				setUsdValue(
 					fromNaturalUnit(totalSupply, token) * usdValue + ' USD',
 				);

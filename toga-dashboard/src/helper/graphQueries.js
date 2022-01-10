@@ -18,6 +18,7 @@ export const GET_TOKEN_STATISTICS = gql`
 			totalNumberOfActiveStreams
 			totalAmountStreamedUntilUpdatedAt
 			token {
+				id
 				underlyingToken {
 					id
 				}
