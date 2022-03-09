@@ -29,12 +29,11 @@ function withSelectedNetwork(WrappedComponent) {
 						typePolicies: {
 							Query: {
 								fields: {
-									agreementLiquidatedByEvents: {
+									agreementLiquidatedV2Events: {
 										keyArgs: [
 											'where',
 											[
-												'bailoutAmount_gt',
-												'bailoutAmount',
+												'liquidationType',
 												'token_in',
 											],
 										],

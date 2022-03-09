@@ -25,10 +25,10 @@ const LiquidatedStreamsContainer = styled.div`
 function getFilter(liqTypes = [], selectedTokens = []) {
 	const filter = {};
 	if (liqTypes.includes(PIRATE.value) && liqTypes.length === 1) {
-		filter.bailoutAmount_gt = 0;
+		filter.liquidationType = 2;
 	}
 	if (liqTypes.includes(REGULAR.value) && liqTypes.length === 1) {
-		filter.bailoutAmount = 0;
+		filter.liquidationType = 0;
 	}
 
 	if (selectedTokens.length > 0) {
@@ -70,7 +70,7 @@ function LiquidatedStreams() {
 			) : (
 				<React.Fragment>
 					<LiquidatedStreamTable
-						data={error ? [] : data.agreementLiquidatedByEvents}
+						data={error ? [] : data.agreementLiquidatedV2Events}
 					/>
 					<LoadMoreBtnContainer>
 						<Button
@@ -80,7 +80,7 @@ function LiquidatedStreams() {
 								fetchMore({
 									variables: {
 										skip:
-											data.agreementLiquidatedByEvents
+											data.agreementLiquidatedV2Events
 												.length,
 									},
 								})

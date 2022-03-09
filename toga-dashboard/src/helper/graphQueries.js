@@ -32,9 +32,9 @@ export const GET_LIQUIDATION_EVENTS = gql`
 	query GetLiquidationEvents(
 		$first: Int!
 		$skip: Int!
-		$where: AgreementLiquidatedByEvent_filter
+		$where: AgreementLiquidatedV2Event_filter
 	) {
-		agreementLiquidatedByEvents(
+		agreementLiquidatedV2Events(
 			first: $first
 			skip: $skip
 			orderBy: timestamp
@@ -42,14 +42,12 @@ export const GET_LIQUIDATION_EVENTS = gql`
 			where: $where
 		) {
 			id
-			liquidatorAccount
-			penaltyAccount
-			bondAccount
+			liquidationType
+			targetAccount
 			rewardAmount
-			bailoutAmount
 			timestamp
 			transactionHash
 			token
 		}
 	}
-`;
+	`;

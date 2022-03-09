@@ -31,7 +31,7 @@ function LiquidatedStreamTable({ data }) {
 	const columns = useMemo(
 		() => [
 			{
-				accessor: 'bailoutAmount',
+				accessor: 'liquidationType',
 				Cell: ({ value }) => (
 					<TypeContainer>
 						{value > 0 ? PIRATE.emoji : REGULAR.emoji}
