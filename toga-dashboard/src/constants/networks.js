@@ -32,7 +32,7 @@ export const MUMBAI = {
 export const GOERLI = {
 	name: 'Goerli',
 	ethersId: 'goerli',
-
+	togaAddress: '0xa54FC15FC75693447d70a57262F37a70B614721b',
 	graphUrl:
 		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-goerli',
 	rpcUrl: process.env.REACT_APP_GOERLI_RPC_URL,
