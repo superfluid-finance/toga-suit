@@ -15,6 +15,8 @@ import {
 	RINKEBY,
 	ROPSTEN,
 	XDAI,
+	ARBITRUM,
+	OPTIMISM,
 } from '../../constants/networks';
 import { isWalletConnected } from '../../helper/web3Utils';
 import WalletConnectProvider from '@walletconnect/web3-provider';
@@ -36,6 +38,8 @@ const getProviderOptions = (networkShortName) => ({
 				80001: MUMBAI.rpcUrl,
 				100: XDAI.rpcUrl,
 				137: MATIC.rpcUrl,
+				10: OPTIMISM.rpcUrl,
+				42161: ARBITRUM.rpcUrl,
 			},
 		},
 	},

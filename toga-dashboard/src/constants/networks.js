@@ -20,6 +20,26 @@ export const MATIC = {
 	rpcUrl: process.env.REACT_APP_MATIC_RPC_URL,
 	getTxLink: (transactionId) => `https://polygonscan.com/tx/${transactionId}`,
 };
+export const OPTIMISM = {
+	name: 'Optimism',
+	coinGeckoId: 'optimistic-ethereum',
+	ethersId: 'optimism',
+	graphUrl:
+		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-optimism-mainnet',
+	togaAddress: '0xA3c8502187fD7a7118eAD59dc811281448946C8f',
+	rpcUrl: process.env.REACT_APP_OPTIMISM_RPC_URL,
+	getTxLink: (transactionId) => `https://optimistic.etherscan.io/tx/${transactionId}`,
+};
+export const ARBITRUM = {
+	name: 'Arbitrum-one',
+	coinGeckoId: 'arbitrum-one',
+	ethersId: 'arbitrum',
+	graphUrl:
+		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-arbitrum-one',
+	togaAddress: '0xFC63B7C762B10670Eda15cF3ca3970bCDB28C9eF',
+	rpcUrl: process.env.REACT_APP_ARBITRUM_RPC_URL,
+	getTxLink: (transactionId) => `https://arbiscan.io/tx/${transactionId}`,
+};
 export const MUMBAI = {
 	name: 'Mumbai',
 	ethersId: 'maticmum',
@@ -74,6 +94,8 @@ export const UNSUPPORTED = { name: 'Unsupported network' };
 export const NETWORK_LIST = [
 	XDAI,
 	MATIC,
+	OPTIMISM,
+	ARBITRUM,
 	MUMBAI,
 	GOERLI,
 	ROPSTEN,
