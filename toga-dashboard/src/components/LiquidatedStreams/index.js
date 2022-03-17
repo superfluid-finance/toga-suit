@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { PIRATE, REGULAR } from '../../constants/liquidationType';
+import { REGULAR, PLEB, PIRATE  } from '../../constants/liquidationType';
 import { GET_LIQUIDATION_EVENTS } from '../../helper/graphQueries';
 import Button from '../Button';
 import PageLoader from '../Loader';
@@ -24,11 +24,14 @@ const LiquidatedStreamsContainer = styled.div`
 
 function getFilter(liqTypes = [], selectedTokens = []) {
 	const filter = {};
-	if (liqTypes.includes(PIRATE.value) && liqTypes.length === 1) {
-		filter.liquidationType = 2;
-	}
 	if (liqTypes.includes(REGULAR.value) && liqTypes.length === 1) {
 		filter.liquidationType = 0;
+	}
+	if (liqTypes.includes(PLEB.value) && liqTypes.length === 1) {
+		filter.liquidationType = 1;
+	}
+	if (liqTypes.includes(PIRATE.value) && liqTypes.length === 1) {
+		filter.liquidationType = 2;
 	}
 
 	if (selectedTokens.length > 0) {

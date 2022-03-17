@@ -15,7 +15,7 @@ import {
 import { naturalUnitToReadable } from '../../helper/tokenUtils';
 import { NetworkContext, SuperTokensContext } from '../context';
 import styled from 'styled-components';
-import { PIRATE, REGULAR } from '../../constants/liquidationType';
+import { REGULAR, PLEB, PIRATE } from '../../constants/liquidationType';
 import { ReactComponent as LinkIcon } from '../images/linkIcon.svg';
 import CopyableAddress from '../common/CopyableAddress';
 
@@ -24,6 +24,17 @@ const TypeContainer = styled.div`
 	justify-content: center;
 	align-items: center;
 `;
+
+function renderLiquidationTypeIcon(value) {
+	switch (value) {
+		case 2:
+			return PIRATE.emoji;
+		case 1:
+			return PLEB.emoji;
+		default:
+			return REGULAR.emoji;
+	}
+}
 
 function LiquidatedStreamTable({ data }) {
 	const tokenMap = useContext(SuperTokensContext);
@@ -34,7 +45,7 @@ function LiquidatedStreamTable({ data }) {
 				accessor: 'liquidationType',
 				Cell: ({ value }) => (
 					<TypeContainer>
-						{value > 0 ? PIRATE.emoji : REGULAR.emoji}
+						{renderLiquidationTypeIcon(value)}
 					</TypeContainer>
 				),
 			},

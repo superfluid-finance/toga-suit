@@ -7,7 +7,7 @@ import {
 	ButtonContainer,
 } from './filterElements';
 import { SuperTokensContext } from '../context/index.js';
-import { PIRATE, REGULAR } from '../../constants/liquidationType.js';
+import { REGULAR, PLEB, PIRATE  } from '../../constants/liquidationType.js';
 import DropdownSelection from '../common/DropdownSelection.js';
 
 function Filter({
@@ -42,7 +42,7 @@ function Filter({
 				<DropdownSelection
 					placeholder=""
 					label="Liquidation Type"
-					options={[PIRATE, REGULAR].map((t) => ({
+					options={[REGULAR, PLEB, PIRATE].map((t) => ({
 						value: t.value,
 						label: t.emoji,
 					}))}
