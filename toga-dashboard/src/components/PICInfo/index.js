@@ -146,8 +146,8 @@ function PICInfo() {
 						loading={loadingPICData}
 					/>
 					<InfoBox
-						title={'Bond'}
-						secondaryInfo={'Bond for the current PIC'}
+						title={'Stake'}
+						secondaryInfo={'Stake for the current PIC'}
 						data={
 							picData.bond
 								? `${naturalUnitToReadable(

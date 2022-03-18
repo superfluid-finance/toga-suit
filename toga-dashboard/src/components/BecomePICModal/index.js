@@ -107,7 +107,7 @@ function BecomePICModal({ enabled, closeModal, togaContract, disableButton }) {
 					onChange={(e) => setExitRate(e.target.value)}
 				/>
 				<LabelledInput
-					label={`Bond (${selectedToken.symbol})`}
+					label={`Stake (${selectedToken.symbol})`}
 					value={bond}
 					onChange={(e) => setBond(e.target.value)}
 				/>
