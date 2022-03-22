@@ -52,6 +52,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
+      - uses: actions/checkout@v2
         with:
           repository: superfluid-finance/build-scripts
           path: build-scripts
@@ -63,7 +65,7 @@ jobs:
           path: build
 
       - name: Deploy
-        uses: build-scripts/s3cloudfront-hosting/actions/sync
+        uses: ./build-scripts/s3cloudfront-hosting/actions/sync
         with:
           local_build_dir: build
           aws_region: eu-west-2
