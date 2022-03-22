@@ -6,6 +6,10 @@ on:
       - master
       - add-github-actions-workflow-for-deployment
 
+defaults:
+  run:
+    working-directory: ./toga-dashboard
+
 jobs:
   build:
     runs-on: ubuntu-latest
