@@ -37,7 +37,6 @@ jobs:
       - name: Install & Build
         run: |
           yarn install --frozen-lockfile --production=false
-          yarn lint --fix
           yarn build
         # NOTE: `--production=false` is because of devDependencies. `yarn` doesn't install them when in production mode.
 
