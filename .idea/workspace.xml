@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c0fcd57e-9766-4565-9d50-6bae5335a0be" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/toga-dashboard/.env" beforeDir="false" afterPath="$PROJECT_DIR$/toga-dashboard/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.github/workflows/release.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/release.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +60,7 @@
       <workItem from="1640249912570" duration="5764000" />
       <workItem from="1647355174745" duration="928000" />
       <workItem from="1647357412572" duration="12000" />
-      <workItem from="1647959023119" duration="2168000" />
+      <workItem from="1647959023119" duration="2520000" />
     </task>
     <servers />
   </component>
