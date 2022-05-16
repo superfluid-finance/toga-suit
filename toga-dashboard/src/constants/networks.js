@@ -40,6 +40,16 @@ export const ARBITRUM = {
 	rpcUrl: process.env.REACT_APP_ARBITRUM_RPC_URL,
 	getTxLink: (transactionId) => `https://arbiscan.io/tx/${transactionId}`,
 };
+export const AVALANCHE = {
+	name: 'Avalanche',
+	coinGeckoId: 'avalanche',
+	ethersId: 'avalanche',
+	graphUrl:
+		'https://thegraph.com/hosted-service/subgraph/superfluid-finance/protocol-v1-avalanche-c',
+	togaAddress: '0x3D9A67D5ec1E72CEcA8157e028855056786b6159',
+	rpcUrl: process.env.REACT_APP_AVALANCHE_RPC_URL,
+	getTxLink: (transactionId) => `https://snowtrace.io/tx/${transactionId}`,
+};
 export const MUMBAI = {
 	name: 'Mumbai',
 	ethersId: 'maticmum',
@@ -96,6 +106,7 @@ export const NETWORK_LIST = [
 	MATIC,
 	OPTIMISM,
 	ARBITRUM,
+	AVALANCHE,
 	MUMBAI,
 	GOERLI,
 	ROPSTEN,
@@ -104,6 +115,7 @@ export const NETWORK_LIST = [
 ];
 
 export function getNetworkByEthersId(etherName) {
+	console.log("etherName, ", etherName)
 	return (
 		NETWORK_LIST.find((n) => n.ethersId === etherName.toLowerCase()) ||
 		UNSUPPORTED

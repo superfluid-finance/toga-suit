@@ -16,6 +16,7 @@ import {
 	ROPSTEN,
 	XDAI,
 	ARBITRUM,
+	AVALANCHE,
 	OPTIMISM,
 } from '../../constants/networks';
 import { isWalletConnected } from '../../helper/web3Utils';
@@ -40,6 +41,7 @@ const getProviderOptions = (networkShortName) => ({
 				137: MATIC.rpcUrl,
 				10: OPTIMISM.rpcUrl,
 				42161: ARBITRUM.rpcUrl,
+				43114: AVALANCHE.rpcUrl,
 			},
 		},
 	},
@@ -103,6 +105,11 @@ function ConnectWalletButton() {
 			return;
 		}
 		const networkChange = (newNetwork) => {
+			//fixture ethers names
+			if(newNetwork.chainId === 43114) {
+				newNetwork.name = "avalanche"
+			}
+			
 			if (selectedNetwork.ethersId !== newNetwork.name) {
 				setSelectedNetwork(getNetworkByEthersId(newNetwork.name));
 			}
