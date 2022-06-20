@@ -45,7 +45,7 @@ export const AVALANCHE = {
 	coinGeckoId: 'avalanche',
 	ethersId: 'avalanche',
 	graphUrl:
-		'https://thegraph.com/hosted-service/subgraph/superfluid-finance/protocol-v1-avalanche-c',
+		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-avalanche-c',
 	togaAddress: '0x3D9A67D5ec1E72CEcA8157e028855056786b6159',
 	rpcUrl: "https://rpc-endpoints.superfluid.dev/avalanche-c",
 	getTxLink: (transactionId) => `https://snowtrace.io/tx/${transactionId}`,
