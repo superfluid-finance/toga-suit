@@ -6,7 +6,7 @@ export const XDAI = {
 	graphUrl:
 		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-xdai',
 	togaAddress: '0xb7DE52F4281a7a276E18C40F94cd93159C4A2d22',
-	rpcUrl: "https://rpc.xdaichain.com/",
+	rpcUrl: "https://rpc-endpoints.superfluid.dev/xdai",
 	getTxLink: (transactionId) =>
 		`https://blockscout.com/xdai/mainnet/tx/${transactionId}`,
 };
