@@ -50,6 +50,16 @@ export const AVALANCHE = {
 	rpcUrl: "https://rpc-endpoints.superfluid.dev/avalanche-c",
 	getTxLink: (transactionId) => `https://snowtrace.io/tx/${transactionId}`,
 };
+export const BINANCE = {
+	name: 'Binance',
+	coinGeckoId: 'binance',
+	ethersId: 'binance',
+	graphUrl:
+		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-bsc-mainnet',
+	togaAddress: '0xFCD84210f5d51Cd40a30443d44d6A5500d5D10dF',
+	rpcUrl: "https://bsc-dataseed1.binance.org/",
+	getTxLink: (transactionId) => `https://bscscan.com/tx/${transactionId}`,
+};
 export const MUMBAI = {
 	name: 'Mumbai',
 	ethersId: 'maticmum',
@@ -107,6 +117,7 @@ export const NETWORK_LIST = [
 	OPTIMISM,
 	ARBITRUM,
 	AVALANCHE,
+	BINANCE,
 	MUMBAI,
 	GOERLI,
 	ROPSTEN,

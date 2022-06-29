@@ -18,6 +18,7 @@ import {
 	ARBITRUM,
 	AVALANCHE,
 	OPTIMISM,
+	BINANCE,
 } from '../../constants/networks';
 import { isWalletConnected } from '../../helper/web3Utils';
 import WalletConnectProvider from '@walletconnect/web3-provider';
@@ -36,6 +37,7 @@ const getProviderOptions = (networkShortName) => ({
 				4: RINKEBY.rpcUrl,
 				5: GOERLI.rpcUrl,
 				42: KOVAN.rpcUrl,
+				56: BINANCE.rpcUrl,
 				80001: MUMBAI.rpcUrl,
 				100: XDAI.rpcUrl,
 				137: MATIC.rpcUrl,
@@ -108,6 +110,8 @@ function ConnectWalletButton() {
 			//fixture ethers names
 			if(newNetwork.chainId === 43114) {
 				newNetwork.name = "avalanche"
+			} else if(newNetwork.chainId === 56) {
+				newNetwork.name = "binance"
 			}
 			
 			if (selectedNetwork.ethersId !== newNetwork.name) {
