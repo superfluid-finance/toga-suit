@@ -1,6 +1,6 @@
 // TODO: replace strings with env variables
 export const XDAI = {
-	name: 'xDAI',
+	name: 'Gnosis Chain',
 	coinGeckoId: 'xdai',
 	ethersId: 'xdai',
 	graphUrl:
@@ -11,7 +11,7 @@ export const XDAI = {
 		`https://blockscout.com/xdai/mainnet/tx/${transactionId}`,
 };
 export const MATIC = {
-	name: 'Matic',
+	name: 'Polygon',
 	coinGeckoId: 'polygon-pos',
 	ethersId: 'matic',
 	graphUrl:
@@ -31,7 +31,7 @@ export const OPTIMISM = {
 	getTxLink: (transactionId) => `https://optimistic.etherscan.io/tx/${transactionId}`,
 };
 export const ARBITRUM = {
-	name: 'Arbitrum-one',
+	name: 'Arbitrum One',
 	coinGeckoId: 'arbitrum-one',
 	ethersId: 'arbitrum',
 	graphUrl:
@@ -41,7 +41,7 @@ export const ARBITRUM = {
 	getTxLink: (transactionId) => `https://arbiscan.io/tx/${transactionId}`,
 };
 export const AVALANCHE = {
-	name: 'Avalanche',
+	name: 'Avalanche C',
 	coinGeckoId: 'avalanche',
 	ethersId: 'avalanche',
 	graphUrl:
@@ -51,7 +51,7 @@ export const AVALANCHE = {
 	getTxLink: (transactionId) => `https://snowtrace.io/tx/${transactionId}`,
 };
 export const BINANCE = {
-	name: 'Binance',
+	name: 'BNB Smart Chain',
 	coinGeckoId: 'binance',
 	ethersId: 'binance',
 	graphUrl:
@@ -61,7 +61,7 @@ export const BINANCE = {
 	getTxLink: (transactionId) => `https://bscscan.com/tx/${transactionId}`,
 };
 export const MUMBAI = {
-	name: 'Mumbai',
+	name: 'Polygon Mumbai (Testnet)',
 	ethersId: 'maticmum',
 	graphUrl:
 		'https://api.thegraph.com/subgraphs/name/superfluid-finance/protocol-v1-mumbai',
@@ -70,7 +70,7 @@ export const MUMBAI = {
 		`https://mumbai.polygonscan.com/tx/${transactionId}`,
 };
 export const GOERLI = {
-	name: 'Goerli',
+	name: 'Goerli (Testnet)',
 	ethersId: 'goerli',
 	togaAddress: '0xa54FC15FC75693447d70a57262F37a70B614721b',
 	graphUrl:
@@ -80,7 +80,7 @@ export const GOERLI = {
 		`https://goerli.etherscan.io/tx/${transactionId}`,
 };
 export const ROPSTEN = {
-	name: 'Ropsten',
+	name: 'Ropsten (Testnet)',
 	ethersId: 'ropsten',
 
 	graphUrl:
@@ -90,7 +90,7 @@ export const ROPSTEN = {
 		`https://ropsten.etherscan.io/tx/${transactionId}`,
 };
 export const KOVAN = {
-	name: 'Kovan',
+	name: 'Kovan (Testnet)',
 	ethersId: 'kovan',
 
 	graphUrl:
@@ -100,7 +100,7 @@ export const KOVAN = {
 		`https://kovan.etherscan.io/tx/${transactionId}`,
 };
 export const RINKEBY = {
-	name: 'Rinkeby',
+	name: 'Rinkeby (Testnet)',
 	ethersId: 'rinkeby',
 
 	graphUrl:
@@ -118,11 +118,8 @@ export const NETWORK_LIST = [
 	ARBITRUM,
 	AVALANCHE,
 	BINANCE,
-	MUMBAI,
 	GOERLI,
-	ROPSTEN,
-	KOVAN,
-	RINKEBY,
+	MUMBAI,
 ];
 
 export function getNetworkByEthersId(etherName) {
