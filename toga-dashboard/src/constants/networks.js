@@ -31,7 +31,7 @@ export const OPTIMISM = {
 	getTxLink: (transactionId) => `https://optimistic.etherscan.io/tx/${transactionId}`,
 };
 export const ARBITRUM = {
-	name: 'Arbitrum One',
+	name: 'Arbitrum',
 	coinGeckoId: 'arbitrum-one',
 	ethersId: 'arbitrum',
 	graphUrl:
