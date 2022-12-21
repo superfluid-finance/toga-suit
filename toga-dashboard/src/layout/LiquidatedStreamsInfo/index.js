@@ -26,7 +26,7 @@ function LiquidatedStreamsInfo() {
 			<SectionHeader text={'Liquidated streams'} />
 
 			<LiquidatedStreamsDetails>
-				{`Liquidated streams for the tokens on ${selectedNetwork.name}`}
+				{`Liquidated streams for the tokens on ${selectedNetwork.humanReadableName}`}
 			</LiquidatedStreamsDetails>
 			<LiquidatedStreams />
 		</LiquidatedStreamsContainer>
