@@ -2132,6 +2132,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@superfluid-finance/metadata@github:superfluid-finance/metadata#pubrpcs_n_coingecko":
+  version "1.1.0"
+  resolved "https://codeload.github.com/superfluid-finance/metadata/tar.gz/f2ec63717edef1eb609a19b6eb6c7eab87bd2650"
+
 "@surma/rollup-plugin-off-main-thread@^1.1.1":
   version "1.4.2"
   resolved "https://registry.npmjs.org/@surma/rollup-plugin-off-main-thread/-/rollup-plugin-off-main-thread-1.4.2.tgz"

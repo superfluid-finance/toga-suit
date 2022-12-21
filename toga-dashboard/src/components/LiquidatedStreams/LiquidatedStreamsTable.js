@@ -103,7 +103,7 @@ function LiquidatedStreamTable({ data }) {
 				Cell: ({ value }) => {
 					return (
 						<TxLinkContainer
-							href={selectedNetwork.getTxLink(value)}
+							href={`${selectedNetwork.explorer}/tx/${value}`}
 							target="_blank"
 						>
 							<ExtensionInfo>

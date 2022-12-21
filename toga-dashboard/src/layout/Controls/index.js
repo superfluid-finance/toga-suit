@@ -30,7 +30,7 @@ function Header() {
 	return (
 		<ControlsContainer>
 			<Logo />
-			<BigInfo text={selectedNetwork.name} />
+			<BigInfo text={selectedNetwork.humanReadableName} />
 			<ConnectControlContainer>
 				<ConnectWalletButton />
 			</ConnectControlContainer>

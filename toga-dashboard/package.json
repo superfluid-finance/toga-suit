@@ -6,6 +6,7 @@
     "@apollo/client": "^3.5.5",
     "@gnosis.pm/safe-apps-sdk": "^6.1.1",
     "@gnosis.pm/safe-apps-web3modal": "^6.0.1",
+    "@superfluid-finance/metadata": "github:superfluid-finance/metadata#pubrpcs_n_coingecko",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",

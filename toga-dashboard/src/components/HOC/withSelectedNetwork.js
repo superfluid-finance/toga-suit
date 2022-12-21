@@ -15,13 +15,13 @@ function withSelectedNetwork(WrappedComponent) {
 		const [apolloClient, setApolloClient] = useState(null);
 
 		useEffect(() => {
-			if (!selectedNetwork) {
+			if (!selectedNetwork || selectedNetwork.chainId === undefined) {
 				return;
 			}
 			setApolloClient(
 				new ApolloClient({
 					link: createHttpLink({
-						uri: selectedNetwork.graphUrl,
+						uri: selectedNetwork.subgraphV1.hostedEndpoint,
 						fetch,
 					}),
 

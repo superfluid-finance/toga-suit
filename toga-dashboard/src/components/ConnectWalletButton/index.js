@@ -7,53 +7,44 @@ import styled from 'styled-components';
 import { ethers } from 'ethers';
 import { abbreviateAddress } from '../../helper/tokenUtils';
 import {
-	getNetworkByEthersId,
-	GOERLI,
-	KOVAN,
-	MATIC,
-	MUMBAI,
-	RINKEBY,
-	ROPSTEN,
-	XDAI,
-	ARBITRUM,
-	AVALANCHE,
-	OPTIMISM,
-	BINANCE,
+	NETWORK_LIST,
+	getNetworkByChainId,
+	getPrimaryProviderUrl,
+	getNetworkByName
 } from '../../constants/networks';
 import { isWalletConnected } from '../../helper/web3Utils';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import CopyableAddress from '../common/CopyableAddress';
 
-const getProviderOptions = (networkShortName) => ({
+const getProviderOptions = (networkName) => ({
 	walletconnect: {
-		network: networkShortName,
+		// ChatGPT claims we can use chainId here. Can we?
+		// the field "network" takes name strings which differ
+		// from canonical names as defined by SF
+		// We can either use chainId or need to have a mapping to
+		// wagmi (?) names
+		chainId: getNetworkByName(networkName).chainId,
 		display: {
 			name: 'Wallet Connect',
 		},
 		package: WalletConnectProvider,
 		options: {
-			rpc: {
-				3: ROPSTEN.rpcUrl,
-				4: RINKEBY.rpcUrl,
-				5: GOERLI.rpcUrl,
-				42: KOVAN.rpcUrl,
-				56: BINANCE.rpcUrl,
-				80001: MUMBAI.rpcUrl,
-				100: XDAI.rpcUrl,
-				137: MATIC.rpcUrl,
-				10: OPTIMISM.rpcUrl,
-				42161: ARBITRUM.rpcUrl,
-				43114: AVALANCHE.rpcUrl,
-			},
+			// creates an object based list with
+			// the chainId as key and the url as value
+			rpc: NETWORK_LIST.reduce((acc, network) => {
+				acc[network.chainId] = getPrimaryProviderUrl(network.name);
+				return acc;
+			}, {})
 		},
 	},
 });
 
-const init = (network) => {
+const init = (networkName) => {
 	return new SafeAppWeb3Modal({
 		cacheProvider: true,
-		network: network.toLowerCase(),
-		providerOptions: getProviderOptions(network),
+		providerOptions: getProviderOptions(networkName),
+		// field "network" is optional and omitted
+		// in order not to interfere with WalletConnect
 	});
 };
 
@@ -106,16 +97,12 @@ function ConnectWalletButton() {
 		if (!ethersProvider) {
 			return;
 		}
+		// "newNetwork" here refers to a data structure provided by wagmi
+		// use chainId, because the "name" field may not match
+		// see network list at https://github.com/wagmi-dev/references/tree/master/packages/chains/src
 		const networkChange = (newNetwork) => {
-			//fixture ethers names
-			if(newNetwork.chainId === 43114) {
-				newNetwork.name = "avalanche"
-			} else if(newNetwork.chainId === 56) {
-				newNetwork.name = "binance"
-			}
-			
-			if (selectedNetwork.ethersId !== newNetwork.name) {
-				setSelectedNetwork(getNetworkByEthersId(newNetwork.name));
+			if (selectedNetwork.chainId !== newNetwork.chainId) {
+				setSelectedNetwork(getNetworkByChainId(newNetwork.chainId));
 			}
 		};
 		const accountsChange = async () => {
@@ -168,12 +155,13 @@ function ConnectWalletButton() {
 			return;
 		}
 		const initConnection = async () => {
-			if (!selectedNetwork) {
+			if (!selectedNetwork || selectedNetwork.chainId === undefined) {
 				return;
 			}
 			setLoading(true);
+			const primaryProviderUrl = getPrimaryProviderUrl(selectedNetwork.name);
 			const ethersProviderOrSigner = new ethers.providers.JsonRpcProvider(
-				selectedNetwork.rpcUrl,
+				primaryProviderUrl,
 			);
 			setEthersProvider(ethersProviderOrSigner);
 			setLoading(false);

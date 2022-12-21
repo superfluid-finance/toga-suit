@@ -84,7 +84,7 @@ function BecomePICModal({ enabled, closeModal, togaContract, disableButton }) {
 			const receipt = await tx.wait();
 			setTxStatus(receipt.status ? SUCCESSFUL : FAILED);
 		} catch (e) {
-			console.log('Unabled to become bic', e);
+			console.log('Unabled to become PIC', e);
 			setTxStatus(FAILED);
 		}
 		disableButton(false);
