@@ -104,7 +104,9 @@ function NetworkSelectionModal({ enabled, setSelectedNetwork }) {
 								key={network.name}
 								onClick={() => setSelectedNetwork(network)}
 							>
-								<Network>{network.name}</Network>
+								<Network>
+									{network.humanReadableName + (network.isTestnet ? " (Testnet)" : "")}
+								</Network>
 							</NetworkSelectionListItem>
 						))}
 					</NetworkSelectionListContainer>
