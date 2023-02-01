@@ -59,7 +59,7 @@ function PICInfo() {
 			return;
 		}
 		setAllowPICInteraction(isWalletConnected(ethersProvider));
-		if (!selectedNetwork.togaAddress) {
+		if (!selectedNetwork.contractsV1.toga) {
 			return;
 		}
 		const togaContractInterface = new utils.Interface(TOGAContractABI);
@@ -67,7 +67,7 @@ function PICInfo() {
 			? ethersProvider.getSigner()
 			: ethersProvider;
 		const contract = new Contract(
-			selectedNetwork.togaAddress,
+			selectedNetwork.contractsV1.toga,
 			togaContractInterface,
 			providerOrSigner,
 		);
