@@ -81,19 +81,10 @@ function PICInfo() {
 		const refreshTogaInfo = async () => {
 			setLoadingPICData(true);
 			try {
-				console.log(selectedToken.id, togaContract)
-				const {
-					pic,
-					exitRate,
-					bond,
-				} = await togaContract.getCurrentPICInfo(selectedToken.id);
-				console.log(pic,
-					exitRate,
-					bond)
+				const { pic, exitRate, bond } =
+					await togaContract.getCurrentPICInfo(selectedToken.id);
 				setPicData({ address: pic, exitRate, bond });
-			} catch (e) {
-				console.log(e)
-			}
+			} catch (e) {}
 
 			setLoadingPICData(false);
 		};
@@ -140,8 +131,8 @@ function PICInfo() {
 						data={
 							picData.address ? (
 								<CopyableAddress
-								     children={abbreviateAddress(
-										picData.address
+									children={abbreviateAddress(
+										picData.address,
 									)}
 									address={picData.address}
 								/>
