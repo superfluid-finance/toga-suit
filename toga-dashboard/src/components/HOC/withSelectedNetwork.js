@@ -7,11 +7,12 @@ import {
 import React, { useEffect, useState } from 'react';
 import { NetworkContext } from '../context';
 import NetworkSelectionModal from '../NetworkSelectionModal';
-
+import WagmiManager, { RainbowKitManager } from '../wallet/WagmiManager';
+import ConnectButtonProvider from '../wallet/ConnectButtonProvider';
 
 function withSelectedNetwork(WrappedComponent) {
 	return function NetworkSelectionWrapper(props) {
-		const [selectedNetwork, setSelectedNetwork] = useState(null);
+ 		const [selectedNetwork, setSelectedNetwork] = useState(null);
 		const [apolloClient, setApolloClient] = useState(null);
 
 		useEffect(() => {
@@ -50,28 +51,31 @@ function withSelectedNetwork(WrappedComponent) {
 				}),
 			);
 		}, [selectedNetwork]);
-		let content;
 
 		if (apolloClient) {
-			content = (
+			return (
 				<NetworkContext.Provider
 					value={{ selectedNetwork, setSelectedNetwork }}
 				>
-					<ApolloProvider client={apolloClient}>
-						<WrappedComponent {...props} />
-					</ApolloProvider>
+					<WagmiManager>
+						<RainbowKitManager>
+							<ConnectButtonProvider>
+								<ApolloProvider client={apolloClient}>
+									<WrappedComponent {...props} />
+								</ApolloProvider>
+							</ConnectButtonProvider>
+						</RainbowKitManager>
+					</WagmiManager>
 				</NetworkContext.Provider>
 			);
-		} else {
-			content = (
-				<NetworkSelectionModal
-					enabled={!selectedNetwork}
-					setSelectedNetwork={setSelectedNetwork}
-				/>
-			);
 		}
-
-		return content;
+		
+		return (
+			<NetworkSelectionModal
+				enabled={!selectedNetwork}
+				setSelectedNetwork={setSelectedNetwork}
+			/>
+		);
 	};
 }
 

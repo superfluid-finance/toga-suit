@@ -1,5 +1,7 @@
 import { ThemeProvider } from 'styled-components';
 import Layout from './layout';
+import WagmiManager, { RainbowKitManager } from '../../components/wallet/WagmiManager';
+
 
 const theme = {
 	colors: {
@@ -21,13 +23,18 @@ const theme = {
 		large: '3rem',
 	},
 };
-
 function App() {
 	return (
 		<div className="App">
+			<WagmiManager>
+				<RainbowKitManager>
+					<ConnectButtonProvider>
 						<ThemeProvider theme={theme}>
 							<Layout />
 						</ThemeProvider>
+					</ConnectButtonProvider>
+				</RainbowKitManager>
+			</WagmiManager>
 		</div>
 	);
 }

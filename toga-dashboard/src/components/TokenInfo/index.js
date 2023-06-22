@@ -39,7 +39,7 @@ function TokenInfo() {
 					secondaryInfo={'Total value streamed'}
 					data={naturalUnitToReadable(
 						totalAmountStreamedUntilUpdatedAt,
-						selectedToken,
+							selectedToken,
 					)}
 					loading={loading}
 				/>

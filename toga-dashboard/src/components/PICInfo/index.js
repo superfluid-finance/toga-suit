@@ -134,8 +134,8 @@ function PICInfo() {
 						data={
 							picData.address ? (
 								<CopyableAddress
-									toDisplay={abbreviateAddress(
-										picData.address,
+								     children={abbreviateAddress(
+										picData.address
 									)}
 									address={picData.address}
 								/>

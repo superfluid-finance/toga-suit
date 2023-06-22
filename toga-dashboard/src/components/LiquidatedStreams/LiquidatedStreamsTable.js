@@ -59,7 +59,7 @@ function LiquidatedStreamTable({ data }) {
 					}
 					return (
 						<CopyableAddress
-							toDisplay={token.readable}
+							children={token.readable}
 							address={token.id}
 						/>
 					);
