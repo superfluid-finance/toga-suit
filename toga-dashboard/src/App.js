@@ -25,9 +25,9 @@ const theme = {
 function App() {
 	return (
 		<div className="App">
-						<ThemeProvider theme={theme}>
-							<Layout />
-						</ThemeProvider>
+			<ThemeProvider theme={theme}>
+				<Layout />
+			</ThemeProvider>
 		</div>
 	);
 }

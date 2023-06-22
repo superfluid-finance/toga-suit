@@ -37,7 +37,6 @@ import bitkeep from "./bitkeep/bitkeep";
           }),
           walletConnectWallet({ chains, projectId, showQrModal: true }),
           coinbaseWallet({ appName, chains }),
-          bitkeep({ chains, shimDisconnect: true }),
           rainbowWallet( { chains, projectId }),
           ...(needsMock ? [mockConnector({ chains })] : []),
         ],

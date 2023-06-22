@@ -81,13 +81,19 @@ function PICInfo() {
 		const refreshTogaInfo = async () => {
 			setLoadingPICData(true);
 			try {
+				console.log(selectedToken.id, togaContract)
 				const {
 					pic,
 					exitRate,
 					bond,
 				} = await togaContract.getCurrentPICInfo(selectedToken.id);
+				console.log(pic,
+					exitRate,
+					bond)
 				setPicData({ address: pic, exitRate, bond });
-			} catch (e) {}
+			} catch (e) {
+				console.log(e)
+			}
 
 			setLoadingPICData(false);
 		};
