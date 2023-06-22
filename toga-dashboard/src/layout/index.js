@@ -5,7 +5,8 @@ import { SectionContainer } from './commonElements';
 import TokenInfoSection from './TokenInfoSection';
 import {
 	NetworkContext,
-	ProviderOrSignerContext,
+	ProviderContext,
+	SignerContext,
 	SuperTokensContext,
 } from '../components/context';
 import { useQuery } from '@apollo/client';
@@ -26,6 +27,8 @@ const PageLoaderContainer = styled.div`
 function Layout() {
 	const [tokenMap, setTokenMap] = useState(null);
 	const [ethersProvider, setEthersProvider] = useState(null);
+	const [signer, setSigner] = useState(null);
+
 	const { selectedNetwork } = useContext(NetworkContext);
 	const { loading } = useQuery(GET_SUPER_TOKENS, {
 		onCompleted: (data) => {
@@ -36,24 +39,27 @@ function Layout() {
 
 	return (
 		<SuperTokensContext.Provider value={tokenMap}>
-			<ProviderOrSignerContext.Provider
+			<ProviderContext.Provider
 				value={{ setEthersProvider, ethersProvider }}
 			>
-				{loading || !tokenMap ? (
-					<PageLoaderContainer>
-						<PageLoader />
-					</PageLoaderContainer>
-				) : (
-					<React.Fragment>
-						<TokenInfoSection />
-						{selectedNetwork && selectedNetwork !== UNSUPPORTED ? (
-							<SectionContainer>
-								<LiquidatedStreamsInfo />
-							</SectionContainer>
-						) : null}
-					</React.Fragment>
-				)}
-			</ProviderOrSignerContext.Provider>
+				<SignerContext.Provider value={{ setSigner, signer }}>
+					{loading || !tokenMap ? (
+						<PageLoaderContainer>
+							<PageLoader />
+						</PageLoaderContainer>
+					) : (
+						<React.Fragment>
+							<TokenInfoSection />
+							{selectedNetwork &&
+							selectedNetwork !== UNSUPPORTED ? (
+								<SectionContainer>
+									<LiquidatedStreamsInfo />
+								</SectionContainer>
+							) : null}
+						</React.Fragment>
+					)}
+				</SignerContext.Provider>
+			</ProviderContext.Provider>
 		</SuperTokensContext.Provider>
 	);
 }

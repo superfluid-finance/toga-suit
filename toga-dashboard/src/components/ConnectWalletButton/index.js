@@ -3,9 +3,9 @@ import Button from '../Button';
 import styled from 'styled-components';
 import CopyableAddress from '../common/CopyableAddress';
 import { useConnectButton } from '../wallet/ConnectButtonProvider';
-import { NetworkContext, ProviderOrSignerContext } from '../context';
+import { NetworkContext, ProviderContext, SignerContext } from '../context';
 import { NETWORK_LIST, tryFindNetwork } from '../../constants/networks';
-import { ethers } from 'ethers';
+import { useEthersSigner } from '../wallet/wagmiEthersAdapters';
 
 const ConnectedAccountContainer = styled.div`
 	height: 100%;
@@ -34,19 +34,19 @@ function ConnectWalletButton() {
 	} = useConnectButton();
 
 	const { setSelectedNetwork } = useContext(NetworkContext);
+	const { setSigner } = useContext(SignerContext);
+	const { setEthersProvider } = useContext(ProviderContext);
 
-	const { setEthersProvider } = useContext(ProviderOrSignerContext);
+	const signer = useEthersSigner();
 
 	useEffect(() => {
-		if (chain) {
+		if (chain && signer) {
 			const network = tryFindNetwork(NETWORK_LIST, chain?.id);
 			setSelectedNetwork(network);
-			let customHttpProvider = new ethers.providers.JsonRpcProvider(
-				network.rpcUrls.superfluid,
-			);
-			setEthersProvider(customHttpProvider);
+			setSigner(signer);
+			setEthersProvider(signer.provider);
 		}
-	}, [chain, setEthersProvider, setSelectedNetwork]);
+	}, [chain, setEthersProvider, setSigner, setSelectedNetwork, signer]);
 
 	// Note: If your app doesn't use authentication, you
 	// can remove all 'authenticationStatus' checks

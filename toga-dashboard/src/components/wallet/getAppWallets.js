@@ -11,7 +11,6 @@ import {
   import gnosisSafe from "./gnosisSafeWalletConnector/gnosisSafe";
   import mockConnector from "./mockConnector/mockConnector";
   import { namedInjectedWallet } from "./namedInjectedWallet/namedInjectedWallet";
-import bitkeep from "./bitkeep/bitkeep";
   
   // Inspired by: https://github.com/rainbow-me/rainbowkit/blob/main/packages/rainbowkit/src/wallets/getDefaultWallets.ts
   export const getAppWallets = ({

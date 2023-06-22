@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from '../Button';
-import { ProviderOrSignerContext, SelectedTokenContext } from '../context';
+import { SelectedTokenContext } from '../context';
 import LabelledInput from '../LabelledInput';
 import PageLoader from '../Loader';
 import { utils, Contract } from 'ethers';
@@ -17,6 +17,7 @@ import {
 	WAITING,
 } from '../../constants/txStatus';
 import BigInfo from '../common/BigInfo';
+import { useEthersSigner } from '../wallet/wagmiEthersAdapters';
 
 const BecomePICModalContainer = styled.div`
 	display: ${(props) => (props.enabled ? 'flex' : 'none')};
@@ -45,12 +46,12 @@ const ControlsContainer = styled.div`
 
 function BecomePICModal({ enabled, closeModal, togaContract, disableButton }) {
 	const selectedToken = useContext(SelectedTokenContext);
-	const { ethersProvider } = useContext(ProviderOrSignerContext);
 
 	const [tokenContract, setTokenContract] = useState(null);
 	const [exitRate, setExitRate] = useState(0);
 	const [bond, setBond] = useState(0);
 	const [txStatus, setTxStatus] = useState(NO_TRANSACTION);
+	const signer = useEthersSigner();
 
 	useEffect(() => {
 		if (enabled) {
@@ -64,10 +65,10 @@ function BecomePICModal({ enabled, closeModal, togaContract, disableButton }) {
 		const contract = new Contract(
 			selectedToken.id,
 			tokenContractInterface,
-			ethersProvider.getSigner(),
+			signer,
 		);
 		setTokenContract(contract);
-	}, [ethersProvider, selectedToken]);
+	}, [signer, selectedToken]);
 
 	async function sendPICBid() {
 		try {
