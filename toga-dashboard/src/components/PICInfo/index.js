@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
 	NetworkContext,
-	ProviderOrSignerContext,
+	ProviderContext,
 	SelectedTokenContext,
+	SignerContext,
 } from '../context';
 import InfoBox from '../InfoBox';
 import { InfoBoxesContainer } from '../InfoBox/commonElements';
@@ -52,10 +53,11 @@ function PICInfo() {
 	const [picData, setPicData] = useState({});
 	const [allowPICInteraction, setAllowPICInteraction] = useState(false);
 	const [togaContract, setTogaContract] = useState(null);
-	const { ethersProvider } = useContext(ProviderOrSignerContext);
+	const { ethersProvider } = useContext(ProviderContext);
+	const { signer } = useContext(SignerContext);
 
 	useEffect(() => {
-		if (!ethersProvider || !selectedNetwork) {
+		if (!ethersProvider || !selectedNetwork || !signer) {
 			return;
 		}
 		setAllowPICInteraction(isWalletConnected(ethersProvider));
@@ -64,7 +66,7 @@ function PICInfo() {
 		}
 		const togaContractInterface = new utils.Interface(TOGAContractABI);
 		const providerOrSigner = isWalletConnected(ethersProvider)
-			? ethersProvider.getSigner()
+			? signer
 			: ethersProvider;
 		const contract = new Contract(
 			selectedNetwork.contractsV1.toga,
@@ -72,7 +74,7 @@ function PICInfo() {
 			providerOrSigner,
 		);
 		setTogaContract(contract);
-	}, [ethersProvider, selectedNetwork]);
+	}, [ethersProvider, selectedNetwork, signer]);
 
 	useEffect(() => {
 		if (!togaContract || !selectedToken) {
@@ -81,11 +83,8 @@ function PICInfo() {
 		const refreshTogaInfo = async () => {
 			setLoadingPICData(true);
 			try {
-				const {
-					pic,
-					exitRate,
-					bond,
-				} = await togaContract.getCurrentPICInfo(selectedToken.id);
+				const { pic, exitRate, bond } =
+					await togaContract.getCurrentPICInfo(selectedToken.id);
 				setPicData({ address: pic, exitRate, bond });
 			} catch (e) {}
 
@@ -134,7 +133,7 @@ function PICInfo() {
 						data={
 							picData.address ? (
 								<CopyableAddress
-									toDisplay={abbreviateAddress(
+									children={abbreviateAddress(
 										picData.address,
 									)}
 									address={picData.address}

@@ -14,10 +14,10 @@ const CopyIcon = styled(CopyContent)`
 	}
 `;
 
-function CopyableAddress({ toDisplay, address }) {
+function CopyableAddress({ children, address }) {
 	return (
 		<React.Fragment>
-			{toDisplay}
+			{children}
 			<CopyIcon
 				onClick={() =>
 					navigator &&

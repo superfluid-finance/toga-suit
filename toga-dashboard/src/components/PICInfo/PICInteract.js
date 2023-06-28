@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { isWalletConnected } from '../../helper/web3Utils';
 import BecomePICModal from '../BecomePICModal';
 import Button from '../Button';
-import { ProviderOrSignerContext } from '../context';
+import { ProviderContext, SignerContext } from '../context';
 import ExitRateModal from '../ExitRateModal';
 
 const InteractivePIC = styled.div`
@@ -16,18 +16,18 @@ const InteractivePIC = styled.div`
 function PICInteract({ picAddress, togaContract, enabled }) {
 	const [modalToggled, toggleModal] = useState(false);
 	const [isPIC, setIsPIC] = useState(false);
-	const { ethersProvider } = useContext(ProviderOrSignerContext);
+	const { ethersProvider } = useContext(ProviderContext);
 	const [buttonDisabled, disableButton] = useState(false);
-	
+	const {signer} = useContext(SignerContext);
+
 	useEffect(() => {
-		if (!picAddress || !isWalletConnected(ethersProvider)) {
+		if (!picAddress || !isWalletConnected(ethersProvider) || !signer) {
 			setIsPIC(false);
 			return;
 		}
 		const checkPIC = async () => {
 			try {
-				const connectedWalletAddress = await ethersProvider
-					.getSigner()
+				const connectedWalletAddress = await signer
 					.getAddress();
 
 				setIsPIC(
@@ -40,7 +40,7 @@ function PICInteract({ picAddress, togaContract, enabled }) {
 			}
 		};
 		checkPIC();
-	}, [ethersProvider, picAddress]);
+	}, [ethersProvider, picAddress, signer]);
 
 	return enabled ? (
 		<InteractivePIC>
