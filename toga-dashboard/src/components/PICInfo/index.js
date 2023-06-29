@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
+	JsonRpcProvider,
 	NetworkContext,
-	ProviderContext,
 	SelectedTokenContext,
 	SignerContext,
 } from '../context';
@@ -53,28 +53,32 @@ function PICInfo() {
 	const [picData, setPicData] = useState({});
 	const [allowPICInteraction, setAllowPICInteraction] = useState(false);
 	const [togaContract, setTogaContract] = useState(null);
-	const { ethersProvider } = useContext(ProviderContext);
+	const { jsonRPCProvider } = useContext(JsonRpcProvider);
 	const { signer } = useContext(SignerContext);
 
 	useEffect(() => {
-		if (!ethersProvider || !selectedNetwork || !signer) {
+		if (!jsonRPCProvider || !selectedNetwork) {
 			return;
 		}
-		setAllowPICInteraction(isWalletConnected(ethersProvider));
+
+		setAllowPICInteraction(isWalletConnected(signer));
 		if (!selectedNetwork.contractsV1.toga) {
 			return;
 		}
+
 		const togaContractInterface = new utils.Interface(TOGAContractABI);
-		const providerOrSigner = isWalletConnected(ethersProvider)
+		const providerOrSigner = isWalletConnected(signer)
 			? signer
-			: ethersProvider;
+			: jsonRPCProvider;
+
 		const contract = new Contract(
 			selectedNetwork.contractsV1.toga,
 			togaContractInterface,
 			providerOrSigner,
 		);
+
 		setTogaContract(contract);
-	}, [ethersProvider, selectedNetwork, signer]);
+	}, [jsonRPCProvider, selectedNetwork, signer]);
 
 	useEffect(() => {
 		if (!togaContract || !selectedToken) {
@@ -125,7 +129,7 @@ function PICInfo() {
 					togaContract={togaContract}
 				/>
 			</PICHeader>
-			{ethersProvider ? (
+			{jsonRPCProvider ? (
 				<InfoBoxesContainer>
 					<InfoBox
 						title={'Address'}

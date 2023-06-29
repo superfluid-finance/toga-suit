@@ -4,8 +4,8 @@ import withSelectedNetwork from '../components/HOC/withSelectedNetwork';
 import { SectionContainer } from './commonElements';
 import TokenInfoSection from './TokenInfoSection';
 import {
+	JsonRpcProvider,
 	NetworkContext,
-	ProviderContext,
 	SignerContext,
 	SuperTokensContext,
 } from '../components/context';
@@ -26,8 +26,8 @@ const PageLoaderContainer = styled.div`
 
 function Layout() {
 	const [tokenMap, setTokenMap] = useState(null);
-	const [ethersProvider, setEthersProvider] = useState(null);
 	const [signer, setSigner] = useState(null);
+	const [jsonRPCProvider, setJsonRPCProvider] = useState(null);
 
 	const { selectedNetwork } = useContext(NetworkContext);
 	const { loading } = useQuery(GET_SUPER_TOKENS, {
@@ -39,8 +39,8 @@ function Layout() {
 
 	return (
 		<SuperTokensContext.Provider value={tokenMap}>
-			<ProviderContext.Provider
-				value={{ setEthersProvider, ethersProvider }}
+			<JsonRpcProvider.Provider
+				value={{ setJsonRPCProvider, jsonRPCProvider }}
 			>
 				<SignerContext.Provider value={{ setSigner, signer }}>
 					{loading || !tokenMap ? (
@@ -59,7 +59,7 @@ function Layout() {
 						</React.Fragment>
 					)}
 				</SignerContext.Provider>
-			</ProviderContext.Provider>
+			</JsonRpcProvider.Provider>
 		</SuperTokensContext.Provider>
 	);
 }

@@ -3,9 +3,10 @@ import Button from '../Button';
 import styled from 'styled-components';
 import CopyableAddress from '../common/CopyableAddress';
 import { useConnectButton } from '../wallet/ConnectButtonProvider';
-import { NetworkContext, ProviderContext, SignerContext } from '../context';
+import { JsonRpcProvider, NetworkContext, SignerContext } from '../context';
 import { NETWORK_LIST, tryFindNetwork } from '../../constants/networks';
 import { useEthersSigner } from '../wallet/wagmiEthersAdapters';
+import { providers } from 'ethers';
 
 const ConnectedAccountContainer = styled.div`
 	height: 100%;
@@ -33,24 +34,47 @@ function ConnectWalletButton() {
 		mounted,
 	} = useConnectButton();
 
-	const { setSelectedNetwork } = useContext(NetworkContext);
+	const { setSelectedNetwork, selectedNetwork } = useContext(NetworkContext);
 	const { setSigner } = useContext(SignerContext);
-	const { setEthersProvider } = useContext(ProviderContext);
+	const { setJsonRPCProvider } = useContext(JsonRpcProvider);
 
 	const signer = useEthersSigner();
 
 	useEffect(() => {
-		if (chain && signer) {
+		if (selectedNetwork && !chain) {
+			const network = tryFindNetwork(NETWORK_LIST, selectedNetwork?.id);
+			setSelectedNetwork(network);
+			setJsonRPCProvider(
+				new providers.JsonRpcProvider(network.rpcUrls.superfluid),
+			);
+			setSigner(null);
+		}
+
+		if (chain) {
 			const network = tryFindNetwork(NETWORK_LIST, chain?.id);
 			setSelectedNetwork(network);
-			setSigner(signer);
-			setEthersProvider(signer.provider);
+			setJsonRPCProvider(
+				new providers.JsonRpcProvider(network.rpcUrls.superfluid),
+			);
 		}
-	}, [chain, setEthersProvider, setSigner, setSelectedNetwork, signer]);
+
+		if (signer) {
+			setSigner(signer);
+		}
+	}, [
+		chain,
+		setJsonRPCProvider,
+		setSigner,
+		setSelectedNetwork,
+		signer,
+		selectedNetwork,
+	]);
 
 	// Note: If your app doesn't use authentication, you
 	// can remove all 'authenticationStatus' checks
+
 	const ready = mounted && authenticationStatus !== 'loading';
+
 	const connected =
 		ready &&
 		account &&
@@ -70,52 +94,10 @@ function ConnectWalletButton() {
 			<CopyableAddress
 				children={
 					<div style={{ display: 'flex' }}>
-						<div
-							onClick={() => openChainModal()}
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								width: '180px',
-							}}
-						>
-							{chain.hasIcon && (
-								<div
-									style={{
-										background: chain.iconBackground,
-										width: 12,
-										height: 12,
-										borderRadius: 999,
-										overflow: 'hidden',
-										marginRight: 4,
-									}}
-								>
-									{chain.iconUrl && (
-										<img
-											alt={chain.name ?? 'Chain icon'}
-											src={chain.iconUrl}
-											style={{
-												width: 12,
-												height: 12,
-											}}
-										/>
-									)}
-								</div>
-							)}
-							{chain.name}
-						</div>
-						<div
-							style={{
-								display: 'flex',
-								alignItems: 'center',
-								width: '210px',
-							}}
-							onClick={openAccountModal}
-						>
-							{account.displayName}
-							{account.displayBalance
-								? ` (${account.displayBalance})`
-								: ''}
-						</div>
+						{account.displayName}
+						{account.displayBalance
+							? ` (${account.displayBalance})`
+							: ''}
 					</div>
 				}
 				address={account.address}

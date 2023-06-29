@@ -9,84 +9,84 @@ export const updatedChainDefination = {
 		...chain.goerli,
 		rpcUrls: {
 			...chain.goerli.rpcUrls,
-			superfluid: 'https://rpc-endpoints.superfluid.dev/eth-goerli',
+			superfluid: getPrimaryProviderUrl('eth-goerli'),
 		},
 	},
 	[chain.gnosis.id]: {
 		...chain.gnosis,
 		iconUrl: "/icons/network/gnosis.svg",
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/xdai-mainnet',
+			superfluid: getPrimaryProviderUrl('xdai-mainnet'),
 		},
 	},
 	[chain.polygon.id]: {
 		...chain.polygon,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/polygon-mainnet',
+			superfluid: getPrimaryProviderUrl('polygon-mainnet'),
 		},
 	},
 	[chain.polygonMumbai.id]: {
 		...chain.polygonMumbai,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/polygon-mumbai',
+			superfluid: getPrimaryProviderUrl('polygon-mumbai'),
 		},
 	},
 	[chain.avalancheFuji.id]: {
 		...chain.avalancheFuji,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/avalanche-fuji',
+			superfluid: getPrimaryProviderUrl('avalanche-fuji'),
 		},
 	},
 	[chain.optimism.id]: {
 		...chain.optimism,
 
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/optimism-mainnet',
+			superfluid: getPrimaryProviderUrl('optimism-mainnet'),
 		},
 	},
 	[chain.arbitrum.id]: {
 		...chain.arbitrum,
 
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/arbitrum-one',
+			superfluid: getPrimaryProviderUrl('arbitrum-one'),
 		},
 	},
 	[chain.avalanche.id]: {
 		...chain.avalanche,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/avalanche-c',
+			superfluid: getPrimaryProviderUrl('avalanche-c'),
 		},
 	},
 	[chain.bsc.id]: {
 		...chain.bsc,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/bsc-mainnet',
+			superfluid: getPrimaryProviderUrl('bsc-mainnet'),
 		},
 	},
 	[chain.mainnet.id]: {
 		...chain.mainnet,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/eth-mainnet',
+			superfluid: getPrimaryProviderUrl('eth-mainnet'),
 		},
 	},
 	[chain.celo.id]: {
 		...chain.celo,
 		iconUrl: "/icons/network/celo-mainnet.svg",
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/celo-mainnet',
+			superfluid: getPrimaryProviderUrl('celo-mainnet'),
 		},
 	},
 	[chain.optimismGoerli.id]: {
 		...chain.optimismGoerli,
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/optimism-goerli',
+			superfluid: getPrimaryProviderUrl('optimism-goerli'),
 		},
 	},
 	[chain.arbitrumGoerli.id]: {
 		...chain.arbitrumGoerli,
 
 		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/arbitrum-goerli',
+			superfluid: getPrimaryProviderUrl('arbitrum-goerli'),
 		},
 	},
 };
