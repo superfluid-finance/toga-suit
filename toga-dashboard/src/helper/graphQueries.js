@@ -6,6 +6,7 @@ export const GET_SUPER_TOKENS = gql`
 			id
 			symbol
 			decimals
+			isListed
 		}
 	}
 `;

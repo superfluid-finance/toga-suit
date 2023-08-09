@@ -14,7 +14,7 @@ export function getTokenString(token) {
 	if (!token) {
 		return '';
 	}
-	return `${token.symbol} (${abbreviateAddress(token.id)})`;
+	return `${!token.isListed ? ' (unlisted) ' : ''}${token.symbol} (${abbreviateAddress(token.id)})`;
 }
 
 async function fetchTokenUsd(networkGoinGeckoId, tokenAddress) {
@@ -48,6 +48,7 @@ export function generateTokenMap(tokens) {
 			readable: getTokenString(token),
 			symbol: token.symbol,
 			decimals: token.decimals,
+			isListed: token.isListed,
 		});
 	});
 	return tokenMap;

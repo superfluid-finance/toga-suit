@@ -19,7 +19,9 @@ function TokenSelection({ setSelectedToken }) {
 		<TokenSelectionContainer>
 			<DropdownSelection
 				placeholder="Select a token..."
-				options={[...tokenMap.values()].map((t) => ({
+				options={[...tokenMap.values()]
+					.sort((a, b) => (b.isListed ? 1 : -1) - (a.isListed ? 1 : -1))
+					.map((t) => ({
 					value: t.id,
 					label: t.readable,
 				}))}
