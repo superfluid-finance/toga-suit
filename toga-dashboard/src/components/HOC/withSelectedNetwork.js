@@ -22,7 +22,7 @@ function withSelectedNetwork(WrappedComponent) {
 			setApolloClient(
 				new ApolloClient({
 					link: createHttpLink({
-						uri: selectedNetwork.subgraphV1.hostedEndpoint,
+						uri: selectedNetwork.subgraphUrl,
 						fetch,
 					}),
 

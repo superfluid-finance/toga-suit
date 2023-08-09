@@ -1,99 +1,21 @@
 import sfMeta from '@superfluid-finance/metadata';
-import * as chain from 'wagmi/chains';
+import * as wagmiChains from 'wagmi/chains';
 const PROVIDER_URL_TEMPLATE = `https://rpc-endpoints.superfluid.dev/{{network}}`;
 
 export const UNSUPPORTED = { name: 'Unsupported network' };
 
-export const updatedChainDefination = {
-	[chain.goerli.id]: {
-		...chain.goerli,
-		rpcUrls: {
-			...chain.goerli.rpcUrls,
-			superfluid: 'https://rpc-endpoints.superfluid.dev/eth-goerli',
-		},
-	},
-	[chain.gnosis.id]: {
-		...chain.gnosis,
-		iconUrl: "/icons/network/gnosis.svg",
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/xdai-mainnet',
-		},
-	},
-	[chain.polygon.id]: {
-		...chain.polygon,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/polygon-mainnet',
-		},
-	},
-	[chain.polygonMumbai.id]: {
-		...chain.polygonMumbai,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/polygon-mumbai',
-		},
-	},
-	[chain.avalancheFuji.id]: {
-		...chain.avalancheFuji,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/avalanche-fuji',
-		},
-	},
-	[chain.optimism.id]: {
-		...chain.optimism,
-
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/optimism-mainnet',
-		},
-	},
-	[chain.arbitrum.id]: {
-		...chain.arbitrum,
-
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/arbitrum-one',
-		},
-	},
-	[chain.avalanche.id]: {
-		...chain.avalanche,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/avalanche-c',
-		},
-	},
-	[chain.bsc.id]: {
-		...chain.bsc,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/bsc-mainnet',
-		},
-	},
-	[chain.mainnet.id]: {
-		...chain.mainnet,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/eth-mainnet',
-		},
-	},
-	[chain.celo.id]: {
-		...chain.celo,
-		iconUrl: "/icons/network/celo-mainnet.svg",
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/celo-mainnet',
-		},
-	},
-	[chain.optimismGoerli.id]: {
-		...chain.optimismGoerli,
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/optimism-goerli',
-		},
-	},
-	[chain.arbitrumGoerli.id]: {
-		...chain.arbitrumGoerli,
-
-		rpcUrls: {
-			superfluid: 'https://rpc-endpoints.superfluid.dev/arbitrum-goerli',
-		},
-	},
-};
-
 export const NETWORK_LIST = sfMeta.networks
-	.map((x) => {
-		return { ...x, ...updatedChainDefination[x.chainId] };
+	.map((n) => {
+		const wagmiChain = Object.values(wagmiChains).find(item => item.id === n.chainId);
+		return {
+			...n,
+			...wagmiChain,
+			rpcUrls: { // merge wagmi provided rpc url's with superfluid's
+				...wagmiChain.rpcUrls,
+				superfluid: `https://rpc-endpoints.superfluid.dev/${n.name}`
+			},
+			subgraphUrl: `https://${n.name}.subgraph.x.superfluid.dev`
+		};
 	})
 	.filter((n) => n.contractsV1.toga !== undefined);
 
