@@ -7,7 +7,7 @@
     "@rainbow-me/rainbowkit": "^1.0.2",
     "@safe-global/safe-apps-sdk": "^7.11.0",
     "@safe-global/safe-apps-web3modal": "^19.0.2",
-    "@superfluid-finance/metadata": "^1.1.10",
+    "@superfluid-finance/metadata": "^1.1.25",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
