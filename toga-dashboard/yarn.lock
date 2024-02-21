@@ -2632,10 +2632,10 @@
     "@stablelib/random" "^1.0.2"
     "@stablelib/wipe" "^1.0.1"
 
-"@superfluid-finance/metadata@^1.1.10":
-  version "1.1.10"
-  resolved "https://registry.yarnpkg.com/@superfluid-finance/metadata/-/metadata-1.1.10.tgz#980991d60066f21646d29eb01a9080c7fae1493d"
-  integrity sha512-IbcpfB/pOwjl/Vam0d1WXNJaeA0bUW/CkQEZlEhUpL+DQh01d6TnxneEjw3VsT9alqamtycKoi6+2uPHAzyvFA==
+"@superfluid-finance/metadata@^1.1.28":
+  version "1.1.28"
+  resolved "https://registry.yarnpkg.com/@superfluid-finance/metadata/-/metadata-1.1.28.tgz#0724432be7486c1fe1f147591f15c1b41391267a"
+  integrity sha512-MbhcHjcVahQZAdZZWBIzeVIFBScgksaejKWy8/hcShymYlo/0fHB2g90ty+vQAc7bZEquHOkRXfgGoP65D+KgQ==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
