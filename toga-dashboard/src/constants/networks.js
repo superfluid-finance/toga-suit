@@ -6,15 +6,18 @@ export const UNSUPPORTED = { name: 'Unsupported network' };
 
 export const NETWORK_LIST = sfMeta.networks
 	.map((n) => {
-		const wagmiChain = Object.values(wagmiChains).find(item => item.id === n.chainId);
+		const wagmiChain = Object.values(wagmiChains).find(
+			(item) => item.id === n.chainId,
+		);
 		return {
 			...n,
 			...wagmiChain,
-			rpcUrls: { // merge wagmi provided rpc url's with superfluid's
+			rpcUrls: {
+				// merge wagmi provided rpc url's with superfluid's
 				...wagmiChain.rpcUrls,
-				superfluid: `https://rpc-endpoints.superfluid.dev/${n.name}`
+				superfluid: `https://rpc-endpoints.superfluid.dev/${n.name}`,
 			},
-			subgraphUrl: `https://${n.name}.subgraph.x.superfluid.dev`
+			subgraphUrl: `https://${n.name}.subgraph.x.superfluid.dev`,
 		};
 	})
 	.filter((n) => n.contractsV1.toga !== undefined);
